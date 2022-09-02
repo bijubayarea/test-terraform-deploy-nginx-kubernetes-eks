@@ -196,7 +196,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
 **Step 9: Create the k8s app & service on EKS**
 
 * Run `terraform apply` command in the working directory. It will be going to create the Kubernetes cluster on AWS
-* Terraform will create the below resources on AWS
+* Terraform will create the below resources on EKS
 
 * k8s deployment
 * k8s service
@@ -225,15 +225,54 @@ This terraform github repo deploys simple nginx application in EKS cluster
 
 **Step 12: Verify the resources on AWS**
 
-* Navigate to your AWS account and verify the resources
+* Navigate to your EKS cluster and verify the resources
 
 1. k8s deployment:
   ```
+  $ kubectl get nodes
+  NAME                                       STATUS   ROLES    AGE   VERSION
+  ip-10-0-1-118.us-west-2.compute.internal   Ready    <none>   13h   v1.23.9-eks-ba74326
+  ip-10-0-2-251.us-west-2.compute.internal   Ready    <none>   13h   v1.23.9-eks-ba74326
+  
+  $ kubectl get deploy nginx -o wide
+  NAME    READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS       IMAGES        SELECTOR
+  nginx   2/2     2            2           9h    nginx-pod-node   nginx:1.7.8   App=nginx-pod-node
+  
+  $ kubectl  get pods -o wide
+  NAME                    READY   STATUS    RESTARTS   AGE   IP           NODE                                       NOMINATED NODE   READINESS GATES
+  nginx-b4988fd99-5hvj8   1/1     Running   0          9h    10.0.1.100   ip-10-0-1-118.us-west-2.compute.internal   <none>           <none>
+  nginx-b4988fd99-pk2cz   1/1     Running   0          9h    10.0.2.90    ip-10-0-2-251.us-west-2.compute.internal   <none>           <none>
+
   ```
 ![3](https://github.com/bijubayarea/test-terraform-deploy-nginx-kubernetes-eks/blob/main/images/3.png)
 
 2. k8s service=LoadBalancer:
    ```
+   $ kubectl get svc -o wide
+   NAME            TYPE           CLUSTER-IP       EXTERNAL-IP                                                               PORT(S)        AGE   SELECTOR
+   kubernetes      ClusterIP      172.20.0.1       <none>                                                                    443/TCP        13h   <none>
+   nginx-service   LoadBalancer   172.20.146.252   ac32240ec0119446cbbad59de348fd7e-2131601910.us-west-2.elb.amazonaws.com   80:31754/TCP   9h    App=nginx-pod-node
+   
+   $ kubectl describe svc nginx-service 
+   Name:                     nginx-service
+   Namespace:                default
+   Labels:                   <none>
+   Annotations:              <none>
+   Selector:                 App=nginx-pod-node
+   Type:                     LoadBalancer
+   IP Family Policy:         SingleStack
+   IP Families:              IPv4
+   IP:                       172.20.146.252
+   IPs:                      172.20.146.252
+   LoadBalancer Ingress:     ac32240ec0119446cbbad59de348fd7e-2131601910.us-west-2.elb.amazonaws.com
+   Port:                     <unset>  80/TCP
+   TargetPort:               80/TCP
+   NodePort:                 <unset>  31754/TCP
+   Endpoints:                10.0.1.100:80,10.0.2.90:80
+   Session Affinity:         None
+   External Traffic Policy:  Cluster
+   Events:                   <none>
+
    ```
 ![4](https://github.com/bijubayarea/test-terraform-deploy-nginx-kubernetes-eks/blob/main/images/4.png)
 
