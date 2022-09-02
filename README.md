@@ -10,7 +10,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
 * Create the Kubernetes deployment using "nginx" image with replicas=2 in node_group_one
 * Create a service of type=LoadBalancer  to expose app for simple create external access
 * initContainer of deployment used to manipulate /usr/share/nginx/html/index.html to display
-* Welcome to POD:<pod-name>  NODE:<node-name> NAMESPACE:<namespace> POD_IP:pod-ip>
+* Welcome to POD:\<pod-name\>  NODE:\<node-name\> NAMESPACE:\<namespace\> POD_IP:pod-ip>
 
 
 **Prerequisites:**
