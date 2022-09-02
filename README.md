@@ -283,7 +283,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
 
 **Step 13: Access NGINX using 'curl' & browser**
 
-* retrieve the access credentials for your cluster from output and configure kubectl
+* Access the NBINX server, confirm load balance fucntionality provided by k8s service
 
   ```
   $ curl -s ac32240ec0119446cbbad59de348fd7e-2131601910.us-west-2.elb.amazonaws.com
