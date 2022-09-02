@@ -2,12 +2,12 @@
 
 Terraform is a free and open-source infrastructure as code (IAC) that can help to automate the deployment, configuration, and management of the remote servers. Terraform can manage both existing service providers and custom in-house solutions.
 
-![1](https://github.com/bijubayarea/test-terraform-eks-cluster/blob/main/images/1.png)
+![1](https://github.com/bijubayarea/test-terraform-deploy-nginx-kubernetes-eks/blob/main/images/1.png)
 
 
 
 This terraform github repo deploys simple nginx application in EKS cluster
-* Create the Kubernetes deployment using "nginx" image with replicas=2 in node_group_1
+* Create the Kubernetes deployment using "nginx" image with replicas=2 in node_group_one
 * Create a service of type=LoadBalancer  to expose app for simple create external access
 * initContainer of deployment used to manipulate /usr/share/nginx/html/index.html to display
 * Welcome to POD:<pod-name>  NODE:<node-name> NAMESPACE:<namespace> POD_IP:pod-ip>
@@ -75,7 +75,8 @@ This terraform github repo deploys simple nginx application in EKS cluster
       initContainers:
       - name: nginx-init        
         image: busybox:1.28
-		    env:
+		    
+        env:
         - name: MY_NODE_NAME
           valueFrom:
             fieldRef:
@@ -110,7 +111,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
 * create k8s deployment "nginx" with replicas=2
 * pod containers: one is initContainer=nginx-init and container=nginx-pod-node
 * intContainer used to get environemnt variables: POD_NAME and NODE_NAME and write to /usr/share/nginx/html/index.html
-* pod ephemeral volume EmptyDir is attached to pod and mounterd on both containers
+* pod ephemeral volume EmptyDir is attached to pod and mounted on both containers 
 
   ```
   containers:
@@ -175,7 +176,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
 
 * store the code in the GitHub repository
 
-![2](https://github.com/bijubayarea/test-terraform-eks-cluster/blob/main/images/2.png)
+![2](https://github.com/bijubayarea/test-terraform-deploy-nginx-kubernetes-eks/blob/main/images/2.png)
 
 **Step 9: Initialize the working directory**
 
@@ -200,7 +201,6 @@ This terraform github repo deploys simple nginx application in EKS cluster
 
 * k8s deployment
 * k8s service
-
 
 
 **Step 12: Check output of terraform apply**
@@ -231,19 +231,19 @@ This terraform github repo deploys simple nginx application in EKS cluster
 1. k8s deployment:
   ```
   ```
-![3](https://github.com/bijubayarea/test-terraform-eks-cluster/blob/main/images/3.png)
+![3](https://github.com/bijubayarea/test-terraform-deploy-nginx-kubernetes-eks/blob/main/images/3.png)
 
 2. k8s service=LoadBalancer:
    ```
    ```
-![4](https://github.com/bijubayarea/test-terraform-eks-cluster/blob/main/images/4.png)
+![4](https://github.com/bijubayarea/test-terraform-deploy-nginx-kubernetes-eks/blob/main/images/4.png)
 
 
 * Kubernetes cluster is ready 
 * Verify access to NGINX application using browser or 'curl' command
 
 
-**Step 12: Access MGINX using 'curl' & browser**
+**Step 12: Access NGINX using 'curl' & browser**
 
 * retrieve the access credentials for your cluster from output and configure kubectl
 
@@ -267,4 +267,4 @@ This terraform github repo deploys simple nginx application in EKS cluster
   Welcome to POD:nginx-b4988fd99-5hvj8 NODE:ip-10-0-1-118.us-west-2.compute.internal NAMESPACE:default POD_IP:10.0.1.100
 
   ```
-  ![5](https://github.com/bijubayarea/test-terraform-eks-cluster/blob/main/images/5.png)
+  ![5](https://github.com/bijubayarea/test-terraform-deploy-nginx-kubernetes-eks/blob/main/images/5.png)
