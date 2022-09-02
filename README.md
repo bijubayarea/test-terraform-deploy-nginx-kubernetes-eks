@@ -64,7 +64,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
   }
   ```
  
-**Step 2:  Create `.tf` file for K8s deployment : NGINX webserver** 
+**Step 3:  Create `.tf` file for K8s deployment : NGINX webserver** 
 
 * Create `k8s-deployment.tf` file for VPC and add below content in it
 * Below in yaml format for easier readabilty (But terraform code used to deploy)
@@ -177,11 +177,11 @@ This terraform github repo deploys simple nginx application in EKS cluster
 
 ![2](https://github.com/bijubayarea/test-terraform-deploy-nginx-kubernetes-eks/blob/main/images/2.png)
 
-**Step 9: Initialize the working directory**
+**Step 7: Initialize the working directory**
 
 * Run `terraform init` command in the working directory. It will download all the necessary providers and all the modules
 
-**Step 10: Create a terraform plan**
+**Step 8: Create a terraform plan**
 
 * Run `terraform plan` command in the working directory. It will give the execution plan
 
@@ -193,7 +193,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
   ```
 
 
-**Step 11: Create the k8s app & service on EKS**
+**Step 9: Create the k8s app & service on EKS**
 
 * Run `terraform apply` command in the working directory. It will be going to create the Kubernetes cluster on AWS
 * Terraform will create the below resources on AWS
@@ -202,7 +202,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
 * k8s service
 
 
-**Step 12: Check output of terraform apply**
+**Step 10: Check output of terraform apply**
 
 * Output for `terraform plan` command 
 
@@ -212,7 +212,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
 
   ```
 
-**Step 12: Set kubeconfig to access EKS kubernetes cluster using kubectl**
+**Step 11: Set kubeconfig to access EKS kubernetes cluster using kubectl**
 
 * retrieve the access credentials for your cluster from output and configure kubectl
 
@@ -223,7 +223,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
   ```
 
 
-**Step 13: Verify the resources on AWS**
+**Step 12: Verify the resources on AWS**
 
 * Navigate to your AWS account and verify the resources
 
@@ -242,7 +242,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
 * Verify access to NGINX application using browser or 'curl' command
 
 
-**Step 12: Access NGINX using 'curl' & browser**
+**Step 13: Access NGINX using 'curl' & browser**
 
 * retrieve the access credentials for your cluster from output and configure kubectl
 
