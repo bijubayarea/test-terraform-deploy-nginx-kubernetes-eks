@@ -10,7 +10,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
 * Create the Kubernetes deployment using "nginx" image with replicas=2 in node_group_one
 * Create a service of type=LoadBalancer  to expose app for simple create external access
 * initContainer of deployment used to manipulate /usr/share/nginx/html/index.html to display
-* Welcome to POD:\<pod-name\>  NODE:\<node-name\> NAMESPACE:\<namespace\> POD_IP:pod-ip>
+* Welcome to  POD:\<pod-name\>    NODE:\<node-name\>    NAMESPACE:\<namespace\>   POD_IP:\<pod-ip\>
 
 
 **Prerequisites:**
@@ -64,8 +64,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
   }
   ```
  
-
-**Step 3: Create .tf file for K8s deployment : NGINX webserver **
+**Step 2:  Create `.tf` file for K8s deployment : NGINX webserver** 
 
 * Create `k8s-deployment.tf` file for VPC and add below content in it
 * Below in yaml format for easier readabilty (But terraform code used to deploy)
@@ -110,7 +109,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
   ```
 * create k8s deployment "nginx" with replicas=2
 * pod containers: one is initContainer=nginx-init and container=nginx-pod-node
-* intContainer used to get environemnt variables: POD_NAME and NODE_NAME and write to /usr/share/nginx/html/index.html
+* intContainer used to get environment variables: POD_NAME and NODE_NAME and write to /usr/share/nginx/html/index.html
 * pod ephemeral volume EmptyDir is attached to pod and mounted on both containers 
 
   ```
@@ -139,7 +138,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
 
 **Step 4: Create .tf file to expose k8s deploy as service=Loadbalancer**
 
-* Create `security.tf` file for k8s service and add below content in it
+* Create `k8s-service.tf` file for k8s service and add below content in it
 * Below in yaml format for easier readabilty (But terraform code used to deploy)
 
   ```
@@ -172,7 +171,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
 * output the name of the LoadBalancer.
 
 
-**Step 8: Store our code to GitHub Repository**
+**Step 6: Store our code to GitHub Repository**
 
 * store the code in the GitHub repository
 
