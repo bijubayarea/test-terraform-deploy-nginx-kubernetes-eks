@@ -14,7 +14,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
 
 **Desired Output:**
 
-    ![5](https://github.com/bijubayarea/test-terraform-deploy-nginx-kubernetes-eks/blob/main/images/5.png)
+![5](https://github.com/bijubayarea/test-terraform-deploy-nginx-kubernetes-eks/blob/main/images/5.png)
 
 **Prerequisites:**
 
