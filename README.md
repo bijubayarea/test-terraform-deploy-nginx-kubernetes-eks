@@ -8,10 +8,13 @@ Terraform is a free and open-source infrastructure as code (IAC) that can help t
 
 This terraform github repo deploys simple nginx application in EKS cluster
 * Create the Kubernetes deployment using "nginx" image with replicas=2 in node_group_one
-* Create a service of type=LoadBalancer  to expose app for simple create external access
+* Create a service of type=LoadBalancer  to expose app for simple external access
 * initContainer of deployment used to manipulate /usr/share/nginx/html/index.html to display
 * Welcome to  POD:\<pod-name\>    NODE:\<node-name\>    NAMESPACE:\<namespace\>   POD_IP:\<pod-ip\>
 
+**Desired Output:**
+
+    ![5](https://github.com/bijubayarea/test-terraform-deploy-nginx-kubernetes-eks/blob/main/images/5.png)
 
 **Prerequisites:**
 
@@ -179,11 +182,11 @@ This terraform github repo deploys simple nginx application in EKS cluster
 
 **Step 7: Initialize the working directory**
 
-* Run `terraform init` command in the working directory. It will download all the necessary providers and all the modules
+* Run `terraform init` command in the working directory, which will download all the necessary providers and all the modules
 
 **Step 8: Create a terraform plan**
 
-* Run `terraform plan` command in the working directory. It will give the execution plan
+* Run `terraform plan` command in the working directory, which  will give the execution plan
 
   ```
   Plan: 6 to add, 0 to change, 0 to destroy.
@@ -195,7 +198,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
 
 **Step 9: Create the k8s app & service on EKS**
 
-* Run `terraform apply` command in the working directory. It will be going to create the Kubernetes cluster on AWS
+* Run `terraform apply` command in the working directory which will create the Kubernetes k8s deployment, service & load balancer
 * Terraform will create the below resources on EKS
 
 * k8s deployment
@@ -284,6 +287,7 @@ This terraform github repo deploys simple nginx application in EKS cluster
 **Step 13: Access NGINX using 'curl' & browser**
 
 * Access the NBINX server, confirm load balance fucntionality provided by k8s service
+* NBINX server displays POD_NAME, NODE_NAME, POD_NAMESPACE & POD_IP
 
   ```
   $ curl -s ac32240ec0119446cbbad59de348fd7e-2131601910.us-west-2.elb.amazonaws.com
