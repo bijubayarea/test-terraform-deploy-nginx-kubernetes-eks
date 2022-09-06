@@ -66,7 +66,7 @@ resource "kubernetes_deployment" "nginx" {
             }
           }
 
-          command = ["sh", "-c", "echo '<html><head><title>Welcome to Pod </title></head> <body>POD:$(MY_POD_NAME) NODE:$(MY_NODE_NAME) NAMESPACE:$(MY_POD_NAMESPACE) POD_IP:$(MY_POD_IP) </body></html>' > /work-dir/index.html"]
+          command = ["sh", "-c", "echo Welcome to POD:$(MY_POD_NAME) NODE:$(MY_NODE_NAME) NAMESPACE:$(MY_POD_NAMESPACE) POD_IP:$(MY_POD_IP)> /work-dir/index.html"]
 
           volume_mount {
             name       = "workdir"
