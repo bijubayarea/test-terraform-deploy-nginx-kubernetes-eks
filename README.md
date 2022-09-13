@@ -26,20 +26,24 @@ This terraform github repo deploys simple nginx application in EKS cluster
 
 **Step 1:  Create `.tf` file for accessing EKS cluster tfstate**
 
-* Create `providers.tf` file and add below content in it
+* Create `providers.tf` file and add below content in it to access remote s3 backend
   ```
   data "terraform_remote_state" "eks" {
-    backend = "local"
+    backend = "s3"
   
     config = {
-      path = "../test-terraform-eks-cluster/terraform.tfstate"
+      bucket = "bijubayarea-s3-remote-backend-deadbeef"
+      key    = "test-terraform-eks-cluster/terraform.tfstate"
+      region = var.region
     }
   }
   ```
 * Retrieve EKS cluster information
   ```
   provider "aws" {
-    region = data.terraform_remote_state.eks.outputs.region
+  region                   = data.terraform_remote_state.eks.outputs.region
+  shared_credentials_files = ["~/.aws/credentials"]
+  profile                  = "vscode-user"
   }
   
   data "aws_eks_cluster" "cluster" {
