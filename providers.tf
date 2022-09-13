@@ -1,15 +1,30 @@
 
+# use remote s3 backend tfstate
 data "terraform_remote_state" "eks" {
-  backend = "local"
+  backend = "s3"
 
   config = {
-    path = "../test-terraform-eks-cluster/terraform.tfstate"
+    bucket = "bijubayarea-s3-remote-backend-deadbeef"
+    key    = "test-terraform-eks-cluster/terraform.tfstate"
+    region = var.region
   }
+
 }
+
+# local backed tfstate
+#data "terraform_remote_state" "eks" {
+#  backend = "local"
+#
+#  config = {
+#    path = "../test-terraform-eks-cluster/terraform.tfstate"
+#  }
+#}
 
 # Retrieve EKS cluster information
 provider "aws" {
-  region = data.terraform_remote_state.eks.outputs.region
+  region                   = data.terraform_remote_state.eks.outputs.region
+  shared_credentials_files = ["~/.aws/credentials"]
+  profile                  = "vscode-user"
 }
 
 data "aws_eks_cluster" "cluster" {
